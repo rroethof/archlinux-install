@@ -112,10 +112,6 @@ user_password=$(get_password "User" "Enter password") || exit 1
 clear
 test -z "$user_password" && echo >&2 "user password cannot be empty" && exit 1
 
-luks_password=$(get_password "LUKS" "Enter password") || exit 1
-clear
-test -z "$luks_password" && echo >&2 "LUKS password cannot be empty" && exit 1
-
 echo "Setting up fastest mirrors..."
 reflector --country NL --latest 24 --sort rate --save /etc/pacman.d/mirrorlist
 clear
@@ -135,8 +131,8 @@ sgdisk --change-name=1:primary --change-name=2:ESP "${device}"
 }
 
 mkfs.vfat -n "EFI" -F 32 "${part_boot}"
-echo -n "$luks_password" | cryptsetup luksFormat --label archlinux "${part_root}"
-echo -n "$luks_password" | cryptsetup luksOpen "${part_root}" archlinux
+cryptsetup luksFormat --label archlinux "${part_root}"
+cryptsetup luksOpen "${part_root}" archlinux
 mkfs.btrfs --label archlinux /dev/mapper/archlinux
 
 # Create btrfs subvolumes
@@ -280,12 +276,10 @@ ln -sfT dash /mnt/usr/bin/sh
 } >/mnt/etc/kernel/cmdline
 
 echo "FONT=$font" >/mnt/etc/vconsole.conf
-echo "KEYMAP=fr-latin1" >>/mnt/etc/vconsole.conf
 
 echo "${hostname}" >/mnt/etc/hostname
 echo "en_US.UTF-8 UTF-8" >>/mnt/etc/locale.gen
-echo "fr_FR.UTF-8 UTF-8" >>/mnt/etc/locale.gen
-ln -sf /usr/share/zoneinfo/Europe/Paris /mnt/etc/localtime
+ln -sf /usr/share/zoneinfo/Europe/Amsterdam /mnt/etc/localtime
 arch-chroot /mnt locale-gen
 
 genfstab -U /mnt >>/mnt/etc/fstab
