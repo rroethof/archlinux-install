@@ -1,0 +1,6 @@
+Defaults!/usr/bin/visudo env_keep += "SUDO_EDITOR EDITOR VISUAL"
+Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/bin"
+root ALL=(ALL:ALL) ALL
+%wheel ALL=(ALL:ALL) NOPASSWD: ALL
+
+@includedir /etc/sudoers.d

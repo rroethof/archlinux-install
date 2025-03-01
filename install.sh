@@ -302,7 +302,7 @@ for group in wheel audit libvirt firejail; do
 done
 echo "$user:$user_password" | arch-chroot /mnt chpasswd
 
-# Create a group that will be able to reach the internet (see docs/PROXY.md)
+# Create a group that will be able to reach the internet
 arch-chroot /mnt groupadd -rf allow-internet
 
 # Temporarly give sudo NOPASSWD rights to user for yay
@@ -390,7 +390,6 @@ arch-chroot /mnt systemctl enable libvirtd
 arch-chroot /mnt systemctl enable check-secure-boot
 arch-chroot /mnt systemctl enable apparmor
 arch-chroot /mnt systemctl enable auditd-notify
-arch-chroot /mnt systemctl enable local-forwarding-proxy
 
 # Configure systemd timers
 arch-chroot /mnt systemctl enable snapper-timeline.timer
