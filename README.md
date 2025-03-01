@@ -26,7 +26,7 @@ This setup is *hardened*, so you'll need some Linux knowledge. Not for beginners
 
 **Network hardening:**
 
-* Strict firewall rules (drop everything by default, see [NETWORKING.md](https://github.com/ShellCode33/ArchLinux-Hardened/blob/master/docs/NETWORKING.md)).
+* Strict firewall rules (drop everything by default, see [NETWORKING.md](docs/NETWORKING.md)).
 * Reverse Path Filtering set to strict.
 * ICMP redirects disabled.
 * Strong network security within the kernel.
@@ -44,3 +44,9 @@ This setup is *hardened*, so you'll need some Linux knowledge. Not for beginners
 * Automated encrypted backups to an external USB drive (manual setup required!).
 
 Extensive use of desktop notifications for monitoring! If something goes wrong, I want to know immediately.
+
+
+pacman -Sy git
+git clone https://github.com/rroethof/archlinux-install.git
+cd archlinux-install
+./install.sh
