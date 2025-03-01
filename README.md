@@ -46,7 +46,8 @@ This setup is *hardened*, so you'll need some Linux knowledge. Not for beginners
 Extensive use of desktop notifications for monitoring! If something goes wrong, I want to know immediately.
 
 
-pacman -Sy git
-git clone https://github.com/rroethof/archlinux-install.git
-cd archlinux-install
-./install.sh
+# Install
+    pacman -Sy git
+    git clone https://github.com/rroethof/archlinux-install.git
+    cd archlinux-install
+    ./install.sh
